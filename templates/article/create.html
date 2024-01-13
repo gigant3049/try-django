@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>Article create</h1>
+{% endblock %}
+
+{% block content %}
+    {% block primary_links %}
+        {{ block.super }}
+        <span>Article Create</span>
+    {% endblock %}
+{% if created %}
+    <div>
+        <span>
+            <a href="{% url 'article:list' %}">Articles</a>
+        </span> /
+        <span>
+            <a href="{% url 'article:create' %}">+ add new one</a>
+        </span>
+        <span>
+            <a href="{% url 'article:create' %}">+ add new one via form</a>
+        </span>
+    </div>
+    <h1>{{ object.title }}</h1>
+    <p>{{ object.content }}</p>
+    <pre>{{ object.created_date }}</pre>
+{% else %}
+<div>
+    <form method="post">
+        {% csrf_token %}
+        <div>
+            <div>
+                <label for="title" class="fw-bolder">Title:</label>
+            </div>
+            <div>
+                <input type="text" id="title" name="title" placeholder="title">
+            </div>
+        </div>
+        <div>
+            <div>
+                <label for="content" class="fw-bolder">Content:</label>
+            </div>
+            <div>
+                <textarea name="content" id="content" cols="60" rows="5"></textarea>
+            </div>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary fw-bolder">Save</button>
+        </div>
+    </form>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>Artile Create Form</h1>
+{% endblock %}
+
+{% block content %}
+    {% block primary_links %}
+        {{ block.super }}
+{#        <span>Article Create Form</span>#}
+    {% endblock %}
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button type="submit" class="fw-bold btn btn-primary">Save</button>
+            <button type="reset" class="fw-bold btn btn-warning">Clear</button>
+            <a href="{% url 'article:list' %}" class="fw-bold btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+{% endblock %}
